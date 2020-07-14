@@ -1,62 +1,54 @@
 class Todo {
 
-  constructor(id)  {
-    this.id = id
-    this.elms = document.createElement('div')
-    this.todo = document.createElement('div')
-    this.done = document.createElement('div')
-  }
+    /**
+     * Le constructeur
+     *
+     * @param todoList
+     * @param doneList
+     */
+    constructor(todoList, doneList) {
+        this.todoList = todoList
+        this.doneList = doneList
+    }
 
-  addElements () {
-    this.inp = new Input('inp')
-    this.btn = new Button('btn', 'Add Task')
 
-    this.inp.handle(this.elms)
-    this.inp.focus()
+    /**
+     * La methode handle permet de créer le(s) element(s) constituant notre classe
+     * et les injecter dans le container qu'il reçoit en paramètre
+     *
+     * @param container
+     */
+    handle(container) {
+        const $this = this
+        $this.elements = $('<div>')
+        let input = new Input('inp')
+        let btn = new Button('btn', 'Add Task')
 
-    this.btn.handle(this.elms)
+        input.handle($this.elements)
+        btn.handle($this.elements)
 
-    this.btn.onClick(() => {
-      let line = document.createElement('div')
-      let task = document.createElement('span')
-      let done = document.createElement('span')
+        container.append($this.elements)
+        input.focus()
 
-      task.innerText = this.inp.val()
-      done.innerText = 'x'
-      done.style.color = 'red'
-      done.style.marginLeft = '2em'
-      done.setAttribute('align', 'right')
+        $this.todoList.handle(container)
+        $this.doneList.handle(container)
 
-      line.append(task)
-      line.append(done)
-      line.style.marginLeft = '1em'
-      this.todo.append(line)
+        btn.click(function (e) {
+            e.preventDefault()
+            let val = input.val()
+            if (val !== '') {
+              const task = new Task(val)
+              input.clear()
+              task.handle($this.todoList)
+              input.focus()
+              task.click($this.doneList)
+            } else {
+                alert('Veuillez renseigner une tâche')
+            }
+        })
 
-      done.addEventListener('click', (e) => {
-        e.preventDefault()
-        done.remove()
-        let lineDone = line.cloneNode(true)
-        line.remove()
-        this.done.append(lineDone)
-      })
-      this.inp.val('')
-      this.inp.focus()
-    })
-  }
 
-  handle() {
-    let app = document.querySelector('#'+this.id)
-    app.append(this.elms)
 
-    app.append(this.todo)
-    this.todo.style.margin = '1em'
-    this.todo.innerHTML = '<h3>To do:</h3>'
-
-    app.append(this.done)
-    this.done.style.margin = '1em'
-    this.done.innerHTML = '<h3>Done:</h3>'
-
-    this.addElements()
-  }
+    }
 
 }

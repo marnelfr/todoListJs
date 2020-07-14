@@ -1,20 +1,58 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Todo List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo List</title>
 </head>
 <body>
-  <div class="container">
-    <div id="app"></div>
-  </div>
+<div class="container">
+    <div class="element">
+        <span>
+            <input type="text" id="todo">
+        </span>
+        <span>
+            <button id="add">Add</button>
+        </span>
+    </div>
+    <div class="list"></div>
+</div>
+<script type="application/javascript">
+    /*
+    * TODO: Modifier le code pour utiliser des class
+    * Mettre en place les class
+    *   Todo, Input, List, Button
+    * */
 
-  <script src="js/components/Input.js"></script>
-  <script src="js/components/Button.js"></script>
-  <script src="js/components/Todo.js"></script>
-  <script src="js/app.js"></script>
+
+
+
+    let inp = new Input('inp')
+
+
+    /*(function () {
+        let todo = document.getElementById('todo')
+        todo.select()
+        document.querySelector('#add').addEventListener('click', function (e) {
+            e.preventDefault()
+            let elm = document.createElement('p')
+
+            elm.innerText = todo.value
+            todo.value = ''
+            todo.select()
+
+            elm.setAttribute('title', 'Click if task ended')
+            elm.style.border = '1px solid black'
+            document.querySelector('.list').append(elm)
+
+            elm.addEventListener('click', function (ev) {
+                ev.preventDefault()
+                elm.remove()
+            })
+        })
+    })()*/
+</script>
 </body>
 </html>

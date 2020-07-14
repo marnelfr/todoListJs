@@ -1,28 +1,37 @@
 class Button {
 
-  constructor(id, text) {
-    this.btn = document.createElement('button')
-    this.btn.setAttribute('type', 'button')
-    this.id = id
-    this.text = text
-  }
+  /**
+     * Le constructeur
+     * @param id
+     * @param label
+     */
+    constructor (id, label) {
+        this.id = id
+        this.label = label
+    }
 
-  handle(container) {
-    this.btn.setAttribute('id', this.id)
-    this.btn.innerText = this.text
-    this.btn.style.marginLeft = '1em'
 
-    let span = document.createElement('span')
-    span.append(this.btn)
-    container.append(span)
-    return this.btn
-  }
+    /**
+     * La methode handle permet de créer le(s) element(s) constituant notre classe
+     * et les injecter dans le container qu'il reçoit en paramètre
+     *
+     * @param container
+     */
+    handle (container) {
+        this.btn = $('<button>')
+        this.btn.text(this.label)
+        this.btn.css('marginLeft', '1em')
+        this.btn.attr('id', this.id)
+        $(container).append(this.btn)
+    }
 
-  onClick(callback) {
-    this.btn.addEventListener('click', function (e) {
-      e.preventDefault()
-      callback()
-    })
-  }
+    /**
+     * Bind le callback recu en argument au click du bouton
+     *
+     * @param callback
+     */
+    click(callback) {
+        this.btn.click(callback)
+    }
 
 }

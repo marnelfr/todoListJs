@@ -1,29 +1,43 @@
 class Input {
 
-  constructor (className) {
-    this.inp = document.createElement('input')
-    this.class = className
-  }
-
-  handle(container) {
-    this.inp.classList.add(this.class)
-    let span = document.createElement('span')
-    span.append(this.inp)
-    container.append(span)
-    return this.inp
-  }
-
-  val(val) {
-    if(!!val) {
-      this.inp.value = val
-      return
+    constructor (id) {
+        this.id = id
     }
-    return this.inp.value
-  }
 
-  focus() {
-    this.inp.select()
-  }
+    /**
+     * La methode handle permet de créer le(s) element(s) constituant notre classe
+     * et les injecter dans le container qu'il reçoit en paramètre
+     *
+     * @param container
+     */
+    handle(container) {
+        this.elm = $('<input>')
+        this.elm.attr('id', this.id)
+        $(container).append(this.elm)
+    }
 
+    /**
+     * Retourne la valeur de l'input
+     *
+     * @returns {string}
+     */
+    val() {
+        return this.elm.val()
+    }
+
+    /**
+     * Met le focus sur l'input
+     */
+    focus() {
+        this.elm.focus()
+    }
+
+
+    /**
+     * Vide l'input
+     */
+    clear() {
+        this.elm.val('')
+    }
 
 }
